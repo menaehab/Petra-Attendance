@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\AttendanceController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ThemeController;
-use App\Models\Attendance;
 use App\Models\Student;
+use App\Models\Attendance;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\ThemeController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AttendanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +41,7 @@ require __DIR__.'/auth.php';
 Route::fallback(function () {
     return redirect()->route('theme.attendance');
 });
-Route::resource('/groups', App\Http\Controllers\GroupController::class);
+Route::resource('/groups', GroupController::class);
+
+Route::resource('/students', StudentController::class);
+Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');
