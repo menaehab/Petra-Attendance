@@ -18,12 +18,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
-
-
-
-
 Route::controller(ThemeController::class)->name('theme.')->group(function () {
     Route::get('/','index')->name('attendance');
    Route::get('/dashboard/{level?}', 'dashboard')->name('dashboard')->middleware('auth');
@@ -31,12 +25,6 @@ Route::controller(ThemeController::class)->name('theme.')->group(function () {
 });
 
 Route::post('/store',[AttendanceController::class,'store'])->name('attendance.store');
-
-
-
-
-
-
 
 
 Route::middleware('auth')->group(function () {
@@ -48,7 +36,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
-
 Route::fallback(function () {
     return redirect()->route('theme.attendance');
 });
+Route::resource('/groups', App\Http\Controllers\GroupController::class);

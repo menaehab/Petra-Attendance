@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('level', ['level 1','level 2','level 3']);
+            $table->enum('level', ['level 1','level 2','level 3'])->index();
             $table->timestamps();
         });
     }
