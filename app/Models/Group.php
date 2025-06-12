@@ -14,4 +14,8 @@ class Group extends Model
     {
         return $this->hasMany(Student::class);
     }
+    public function sessions()
+    {
+        return $this->hasMany(Session::class);
+    }
 }
