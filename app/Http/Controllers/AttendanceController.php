@@ -11,7 +11,6 @@ class AttendanceController extends Controller
 
 
           $student = Student::where('code', $request->code)->first();
-          $student->streak++;
           $student->save();
          return to_route('theme.attendance');
 
