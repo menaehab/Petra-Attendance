@@ -6,6 +6,22 @@
         <input type="file" name="file" required>
         <button type="submit" class="btn btn-primary">Import</button>
     </form>
+    @if (session('failures'))
+        @foreach (session('failures') as $failure)
+            <div>
+                <p>{{ $failure->row() }}</p>
+                <p>{{ $failure->attribute() }}</p>
+                <p>
+                <ul>
+                    @foreach ($failure->errors() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                </p>
+
+            </div>
+        @endforeach
+    @endif
     <table class="table">
         <thead>
             <tr>

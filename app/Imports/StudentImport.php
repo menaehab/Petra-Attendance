@@ -7,9 +7,10 @@ use App\Models\Student;
 use Maatwebsite\Excel\Concerns\ToArray;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\SkipsOnFailure;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 
-class StudentImport implements ToArray, WithValidation,SkipsOnFailure
+class StudentImport implements ToArray, WithValidation,SkipsOnFailure,WithHeadingRow
 {
     use SkipsFailures;
     /**
@@ -17,7 +18,6 @@ class StudentImport implements ToArray, WithValidation,SkipsOnFailure
     */
     public function array(array $array)
     {
-        unset($array[0]);
         foreach ($array as $row) {
             $group = Group::where('name', $row[3])->first();
             if (!$group) {
@@ -40,10 +40,10 @@ class StudentImport implements ToArray, WithValidation,SkipsOnFailure
     public function rules(): array
     {
         return [
-            '0' => 'required|string|max:255',
-            '1' => 'nullable',
-            '2' => 'unique:students,code',
-            '3' => 'required|exists:groups,name',
+            __('keywords.name') => 'required|string|max:255',
+            __('keywords.phone') => 'nullable',
+            __('keywords.code') => 'unique:students,code',
+            __('keywords.group_id') => 'required|exists:groups,name',
         ];
     }
 }

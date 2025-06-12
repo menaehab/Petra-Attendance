@@ -52,10 +52,15 @@ class StudentController extends Controller
 
     public function import(Request $request): \Illuminate\Http\RedirectResponse
     {
-        $request->validate([
-            'file' => 'required|file|mimes:xlsx,xls',
-        ]);
-        Excel::import(new StudentImport, $request->file('file'));
+        $import = new StudentImport;
+        Excel::import($import, $request->file('file'));
+
+        if ($import->failures()->isNotEmpty()) {
+            return redirect()->back()->with([
+                'failures' => $import->failures(),
+            ]);
+        }
+
         return redirect()->route('students.index')->with('success', 'Imported successfully');
     }
 }
