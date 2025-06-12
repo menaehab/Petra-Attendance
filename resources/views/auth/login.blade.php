@@ -37,17 +37,6 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <div>
-          <label for="level" class="block mb-2 text-sm font-medium text-gray-600">Select Level</label>
-          <select id="level" name="level" required
-            class="w-full p-3 rounded-xl bg-gray-100 border border-gray-300 text-gray-700 outline-none focus:ring-2 focus:ring-indigo-400">
-            <option value="">-- Choose Level --</option>
-            <option value="dashboard-level1.html">Level 1</option>
-            <option value="dashboard-level2.html">Level 2</option>
-            <option value="dashboard-level3.html">Level 3</option>
-          </select>
-        </div>
-
         <button type="submit"
           class="w-full bg-indigo-500 hover:bg-indigo-400 text-white font-semibold py-3 rounded-xl shadow-md transition">
           Login
@@ -56,15 +45,7 @@
     </div>
   </div>
 
-  <script>
-    const form = document.getElementById('loginForm');
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const level = document.getElementById('level').value;
-      form.action = '/login?level=' + encodeURIComponent(level);
-      form.submit();
-    });
-  </script>
+
 
 </body>
 

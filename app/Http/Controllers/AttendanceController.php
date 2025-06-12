@@ -7,20 +7,17 @@ use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
+    public function store(Request  $request){
+
+
+          $student = Student::where('code', $request->code)->first();
+          $student->streak++;
+          $student->save();
+         return to_route('theme.attendance');
 
 
 
 
-    public function store(Request $request){
-
-
-        dd($request);
-        // $code=$request->code;
-        // $row =Student::where('code','=' ,$code)->first();
-        // $row->streak++;
-        // $row->save();
-        // dd($row);
-        // return to_route('Attendance');
 
     }
 }
