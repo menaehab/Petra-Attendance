@@ -19,7 +19,7 @@
         <div class="mr-5">
             <a href="{{ route('theme.attendance') }}"
                 class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
-                {{ __('keywords.Attendance') }}
+                {{ __('keywords.attendance') }}
             </a>
         </div>
     </div>

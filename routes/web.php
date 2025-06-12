@@ -22,7 +22,7 @@ use App\Http\Controllers\AttendanceController;
 
 Route::controller(ThemeController::class)->name('theme.')->group(function () {
     Route::get('/','index')->name('attendance');
-   Route::get('/dashboard/{level?}', 'dashboard')->name('dashboard')->middleware('auth');
+    Route::get('/dashboard/{level?}', 'dashboard')->name('dashboard')->middleware('auth');
     Route::get('/student','student')->name('studentdetails')->middleware('auth');
 });
 
@@ -30,9 +30,17 @@ Route::post('/store',[AttendanceController::class,'store'])->name('attendance.st
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::resource('/groups', GroupController::class);
+
+    Route::resource('/students', StudentController::class)->except(['show','index']);
+    Route::get('/students/{id}', [StudentController::class, 'index'])->name('students.index');
+    Route::get('/students/show/{student}', [StudentController::class, 'show'])->name('students.show');
+
+    Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');
 });
 
 require __DIR__.'/auth.php';
@@ -41,7 +49,3 @@ require __DIR__.'/auth.php';
 Route::fallback(function () {
     return redirect()->route('theme.attendance');
 });
-Route::resource('/groups', GroupController::class);
-
-Route::resource('/students', StudentController::class);
-Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');
