@@ -2,7 +2,7 @@
 
 return [
     'Attendance_Dashboard' => 'لوحة التحكم الحضور',
-    'Attendance' => 'الحضور',
+    'attendance' => 'الحضور',
     'total_sessions' => 'الجلسات الكلية',
     'total_present' => 'الحضور الكلي',
     'total_absent' => 'الغياب الكلي',
@@ -15,4 +15,7 @@ return [
     'phone' => 'رقم التليفون',
     'code' => 'الكود',
     'group_id' => 'المجموعة',
+    'group' => 'المجموعة',
+    'action' => 'الإجراءات',
+    'students' => 'طلاب',
     ];

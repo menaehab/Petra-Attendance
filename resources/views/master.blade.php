@@ -3,7 +3,7 @@
 
 @include('parts.head')
 
-<body class="bg-[#f5f7fa] text-gray-900 font-sans min-h-screen" dir="rtl">
+<body class="min-h-screen font-sans text-gray-900 bg-gray-100" dir="rtl">
 
     @include('parts.navbar')
 

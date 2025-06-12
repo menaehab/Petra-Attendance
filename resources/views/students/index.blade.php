@@ -1,55 +1,73 @@
-<div class="container">
-    <h2>students List</h2>
-    <a href="{{ route('students.create') }}" class="mb-3 btn btn-primary">Create students</a>
-    <form action="{{ route('students.import') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <input type="file" name="file" required>
-        <button type="submit" class="btn btn-primary">Import</button>
-    </form>
-    @if (session('failures'))
-        @foreach (session('failures') as $failure)
-            <div>
-                <p>{{ $failure->row() }}</p>
-                <p>{{ $failure->attribute() }}</p>
-                <p>
-                <ul>
-                    @foreach ($failure->errors() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-                </p>
-
+@extends('master')
+@section('content')
+    <div class="container mx-auto my-12">
+        <!-- component -->
+        <div class="text-gray-900 ">
+            <div class="p-4">
+                <h1 class="text-3xl text-center">
+                    {{ __('keywords.students') . ' ' . $group->name }}
+                </h1>
             </div>
-        @endforeach
-    @endif
-    <table class="table">
-        <thead>
-            <tr>
-                <th>name</th>
-                <th>phone</th>
-                <th>code</th>
-                <th>group_id</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($students as $item)
-                <tr>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ $item->phone }}</td>
-                    <td>{{ $item->code }}</td>
-                    <td>{{ $item->group_id }}</td>
-                    <td>
-                        <a href="{{ route('students.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('students.destroy', $item->id) }}" method="POST"
-                            style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm"
-                                onclick="return confirm('Are you sure?')">Delete</button>
-                        </form>
-                    </td>
-                </tr>
+            <div class="flex justify-center px-3 py-4">
+                <table class="w-full mb-4 bg-white rounded shadow-md text-md">
+                    <thead class="text-center">
+                        <tr class="border-b">
+                            <th class="p-3 px-5">#</th>
+                            <th class="p-3 px-5">{{ __('keywords.name') }}</th>
+                            <th class="p-3 px-5">{{ __('keywords.phone') }}</th>
+                            <th class="p-3 px-5">{{ __('keywords.code') }}</th>
+                            <th class="p-3 px-5">{{ __('keywords.attendance') }}</th>
+                            <th class="p-3 px-5">{{ __('keywords.action') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($students as $student)
+                            <tr class="text-center bg-gray-100 border-b hover:bg-indigo-100">
+                                <td class="p-3 px-5">{{ $student->id }}</td>
+                                <td class="p-3 px-5">{{ $student->name }}</td>
+                                <td class="p-3 px-5">{{ $student->phone }}</td>
+                                <td class="p-3 px-5">{{ $student->code }}</td>
+                                <td class="p-3 px-5">
+                                    <div class="flex justify-center gap-1">
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        @foreach ($student->attendance_statuses as $status)
+                                            <div
+                                                class="w-2 h-2 rounded-full {{ $status ? 'bg-green-500' : 'bg-red-500' }}">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </td>
+                                <td class="flex justify-center gap-1 p-3 px-5">
+                                    {{-- <a href="#"><i
+                                            class="p-2 text-white transition-colors bg-blue-500 rounded fa fa-eye hover:bg-blue-600"></i></a> --}}
+                                    <a href="#"><i
+                                            class="p-2 text-white transition-colors bg-yellow-500 rounded fa fa-edit hover:bg-yellow-600"></i></a>
+                                    <a href="#"><i
+                                            class="p-2 text-white transition-colors bg-red-500 rounded fa fa-trash hover:bg-red-600"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+@endsection
+
+{{-- @if (session('failures'))
+@foreach (session('failures') as $failure)
+    <div>
+        <p>{{ $failure->row() }}</p>
+        <p>{{ $failure->attribute() }}</p>
+        <p>
+        <ul>
+            @foreach ($failure->errors() as $error)
+                <li>{{ $error }}</li>
             @endforeach
-        </tbody>
-    </table>
-</div>
+        </ul>
+        </p>
+
+    </div>
+@endforeach --}}
