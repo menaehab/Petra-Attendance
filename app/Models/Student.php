@@ -11,13 +11,11 @@ class Student extends Model
     use HasFactory;
         protected $fillable = ['name', 'phone', 'code', 'group_id'];
 
-    // الطالب ينتمي لجروب
     public function group()
     {
         return $this->belongsTo(Group::class);
     }
 
-    // علاقة الطالب بالحضور (Many To Many من خلال جدول attendances)
     public function attendances()
     {
         return $this->hasMany(Attendance::class);

@@ -25,14 +25,14 @@ class StudentImport implements ToArray, WithValidation,SkipsOnFailure,WithHeadin
             }
             Student::create([
                 'name' => $row[0],
-                'phone' => $row[1],
+                'phone' => (string) $row[1],
                 'code' => $row[2],
                 'group_id' => $group->id,
             ]);
         }
     }
 
-     /**
+    /**
      * Define validation rules for each row.
      *
      * @return array
