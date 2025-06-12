@@ -23,13 +23,14 @@ class StudentController extends Controller
 
     public function create(): View
     {
-        return view('students.create');
+        $groups = Group::get();
+        return view('students.create',compact('groups'));
     }
 
     public function store(StudentRequest $request): RedirectResponse
     {
         Student::create($request->validated());
-        return redirect()->route('students.index')->with('success', 'Created successfully');
+        return redirect()->route('theme.dashboard')->with('success', 'Created successfully');
     }
 
     public function show(Student $student): View
@@ -39,19 +40,20 @@ class StudentController extends Controller
 
     public function edit(Student $student): View
     {
-        return view('students.edit', compact('student'));
+        $groups = Group::get();
+        return view('students.edit', compact('student','groups'));
     }
 
     public function update(StudentRequest $request, Student $student): RedirectResponse
     {
         $student->update($request->validated());
-        return redirect()->route('students.index')->with('success', 'Updated successfully');
+        return redirect()->route('theme.dashboard')->with('success', 'Updated successfully');
     }
 
     public function destroy(Student $student): RedirectResponse
     {
         $student->delete();
-        return redirect()->route('students.index')->with('success', 'Deleted successfully');
+        return redirect()->route('theme.dashboard')->with('success', 'Deleted successfully');
     }
 
     public function import(Request $request): RedirectResponse
@@ -65,6 +67,6 @@ class StudentController extends Controller
             ]);
         }
 
-        return redirect()->route('students.index')->with('success', 'Imported successfully');
+        return redirect()->route('theme.dashboard')->with('success', 'Imported successfully');
     }
 }

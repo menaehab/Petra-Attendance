@@ -35,6 +35,8 @@ class Student extends Model
             }
 
             return $statuses;
+
+            
         });
     }
 }
