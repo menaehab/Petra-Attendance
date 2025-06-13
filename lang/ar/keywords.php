@@ -60,5 +60,6 @@ return [
     'code_exists'=>'الكود غير موجود',
     'student_from_different_group' => 'الطالب من مجموعة مختلفة',
     'student_already_attended' => 'الطالب بالفعل سجل حضور في نفس الجلسة',
-    'update'=>'تحديث'
+    'update'=>'تحديث',
+    'session_details'=>'تفاصيل الحصة',
 ];

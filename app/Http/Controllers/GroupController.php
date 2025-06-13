@@ -22,16 +22,14 @@ class GroupController extends Controller
 
     public function store(GroupRequest $request): \Illuminate\Http\RedirectResponse
     {
-
-
         Group::create($request->validated());
         return redirect()->route('groups.index')->with('success', 'Created successfully');
     }
 
-    public function show(Group $group): \Illuminate\Contracts\View\View
-    {
-        return view('groups.show', compact('group'));
-    }
+    // public function show(Group $group): \Illuminate\Contracts\View\View
+    // {
+    //     return view('groups.show', compact('group'));
+    // }
 
     public function edit(Group $group): \Illuminate\Contracts\View\View
     {

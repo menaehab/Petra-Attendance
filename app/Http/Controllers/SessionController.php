@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Group;
 use App\Models\Session;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class SessionController extends Controller
@@ -49,8 +50,13 @@ class SessionController extends Controller
      */
     public function show(string $id)
     {
-        $session=Session::find($id);
-        return view('sessions.show',compact('session'));
+        $session=Session::findOrFail($id);
+        $students = Student::where('group_id', $session->group_id)
+        ->with(['attendances' => function ($query) use ($id) {
+            $query->where('session_id', $id);
+        }])
+        ->get();
+        return view('sessions.show',compact('session','students'));
     }
 
     /**
