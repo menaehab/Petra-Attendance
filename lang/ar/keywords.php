@@ -62,4 +62,6 @@ return [
     'student_already_attended' => 'الطالب بالفعل سجل حضور في نفس الجلسة',
     'update'=>'تحديث',
     'session_details'=>'تفاصيل الحصة',
+    'admin_panel'=>'لوحة تحكم',
+    'petra'=>'بيترا',
 ];

@@ -3,11 +3,6 @@
     <div class="container mx-auto my-4">
         <!-- component -->
         <div class="text-gray-900 ">
-            <div class="p-4">
-                {{-- <h1 class="text-3xl text-center">
-                    {{ __('keywords.students') . ' ' . $group->name }}
-                </h1> --}}
-            </div>
             <div class="flex justify-center px-3 py-4">
                 <h1 class="text-5xl text-center">
                     {{ __('keywords.students') . ' ' . $group->name }}
