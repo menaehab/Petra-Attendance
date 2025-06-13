@@ -96,6 +96,12 @@
                     }, 100);
                 }
             });
+
+            Livewire.on('open-whatsapp', ({
+                link
+            }) => {
+                window.open(link, '_blank');
+            });
         });
     </script>
 </div>
