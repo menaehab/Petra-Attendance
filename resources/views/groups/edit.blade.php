@@ -19,11 +19,15 @@
                 <label for="group_id"
                     class="block mb-1 text-sm font-medium text-gray-700">{{ __('keywords.level') }}</label>
                 <select name="level" id="group_id"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-300" required>
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-300"
+                    required>
                     <option value="">{{ __('keywords.choose_level') }}</option>
-                    <option value="level 1">{{ __('keywords.level-1') }}</option>
-                    <option value="level 2">{{ __('keywords.level-2') }}</option>
-                    <option value="level 3">{{ __('keywords.level-3') }}</option>
+                    <option value="level 1" {{ $group->level == 'level 1' ? 'selected' : '' }}>{{ __('keywords.level-1') }}
+                    </option>
+                    <option value="level 2" {{ $group->level == 'level 2' ? 'selected' : '' }}>{{ __('keywords.level-2') }}
+                    </option>
+                    <option value="level 3" {{ $group->level == 'level 3' ? 'selected' : '' }}>
+                        {{ __('keywords.level-3') }}</option>
                 </select>
 
                 @error('group_id')

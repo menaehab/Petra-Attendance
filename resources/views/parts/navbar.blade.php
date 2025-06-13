@@ -13,16 +13,8 @@
             </div>
         </div>
         <span class="text-xl font-bold text-gray-800">
-            <a href="{{ route('theme.attendance') }}">Petra Coding School</a>
+            <a href="{{ route('dashboard') }}">Petra Coding School</a>
         </span>
-
-        <div class="mr-5">
-            <a href="{{ route('theme.attendance') }}"
-                class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
-                {{ __('keywords.attendance') }}
-            </a>
-        </div>
-
         @if (Auth::check())
             <div class="mr-5">
                 <a href="{{ route('groups.index') }}"
@@ -39,9 +31,23 @@
             </div>
 
             <div class="mr-5">
+                <a href="{{ route('students.create') }}"
+                    class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
+                    {{ __('keywords.create_student') }}
+                </a>
+            </div>
+
+            <div class="mr-5">
                 <a href="{{ route('students.import') }}"
                     class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
                     {{ __('keywords.import_student') }}
+                </a>
+            </div>
+
+            <div class="mr-5">
+                <a href="{{ route('attendance') }}"
+                    class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
+                    {{ __('keywords.attendance') }}
                 </a>
             </div>
         @endif
@@ -51,7 +57,7 @@
     <div>
         @if (Auth::check())
             <div class="flex items-center gap-4">
-                <a href="{{ route('theme.dashboard') }}"
+                <a href="{{ route('dashboard') }}"
                     class="px-5 py-2 font-semibold text-white bg-indigo-500 rounded-lg hover:bg-indigo-400 transition duration-300 shadow">
                     {{ __('Dashboard') }}
                 </a>

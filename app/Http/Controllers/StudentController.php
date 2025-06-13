@@ -25,13 +25,14 @@ class StudentController extends Controller
     public function create(): View
     {
         $groups = Group::get();
+
         return view('students.create',compact('groups'));
     }
 
     public function store(StudentRequest $request): RedirectResponse
     {
         Student::create($request->validated());
-        return redirect()->route('theme.dashboard')->with('success', 'Created successfully');
+        return redirect()->route('dashboard')->with('success', 'Created successfully');
     }
 
     public function show(Student $student): View
@@ -48,13 +49,13 @@ class StudentController extends Controller
     public function update(StudentRequest $request, Student $student): RedirectResponse
     {
         $student->update($request->validated());
-        return redirect()->route('theme.dashboard')->with('success', 'Updated successfully');
+        return redirect()->route('dashboard')->with('success', 'Updated successfully');
     }
 
     public function destroy(Student $student): RedirectResponse
     {
         $student->delete();
-        return redirect()->route('theme.dashboard')->with('success', 'Deleted successfully');
+        return redirect()->route('dashboard')->with('success', 'Deleted successfully');
     }
 
     public function importPage(): View
@@ -80,6 +81,6 @@ class StudentController extends Controller
             ]);
         }
 
-        return redirect()->route('theme.dashboard')->with('success', 'Imported successfully');
+        return redirect()->route('dashboard')->with('success', 'Imported successfully');
     }
 }

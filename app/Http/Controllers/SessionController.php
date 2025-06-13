@@ -40,7 +40,7 @@ class SessionController extends Controller
         ]);
 
 
-        return redirect()->route('session.index')->with('success', 'Created successfully');
+        return redirect()->route('sessions.index')->with('success', 'Created successfully');
 
     }
 
@@ -49,7 +49,8 @@ class SessionController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $session=Session::find($id);
+        return view('sessions.show',compact('session'));
     }
 
     /**
@@ -57,7 +58,9 @@ class SessionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $session=Session::find($id);
+        $groups = Group::all();
+        return view('sessions.edit',compact('session','groups'));
     }
 
     /**
@@ -65,7 +68,13 @@ class SessionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+        $session=Session::find($id);
+        $session->update([
+            'group_id' => $request->group,
+            'date' => $request->start_time,
+        ]);
+
+        return redirect()->route('sessions.index')->with('success', 'Updated successfully');
     }
 
     /**
@@ -74,6 +83,6 @@ class SessionController extends Controller
     public function destroy(Session $session)
     {
         $session->delete();
-        return redirect()->route('session.index')->with('success', 'Deleted successfully');
+        return redirect()->route('sessions.index')->with('success', 'Deleted successfully');
     }
 }

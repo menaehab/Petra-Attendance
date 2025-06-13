@@ -47,4 +47,18 @@ return [
     'import_errors' => 'أخطاء في الاستيراد',
     'row' => 'الصف',
     'column' => 'العمود',
+    'start_time' => 'وقت البدء',
+    'edit_session'=>'تعديل حصة',
+    'code_required'=>'الكود مطلوب',
+    'code_unique'=>'الكود موجود',
+    'group_required'=>'المجموعة مطلوبة',
+    'group_exists'=>'المجموعة غير موجودة',
+    'session_required'=>'الحصة مطلوبة',
+    'session_exists'=>'الحصة غير موجودة',
+    'student_not_found'=>'الطالب غير موجود',
+    'attendance_success'=>'تم الحضور بنجاح',
+    'code_exists'=>'الكود غير موجود',
+    'student_from_different_group' => 'الطالب من مجموعة مختلفة',
+    'student_already_attended' => 'الطالب بالفعل سجل حضور في نفس الجلسة',
+    'update'=>'تحديث'
 ];

@@ -46,7 +46,7 @@
                                     <td class="px-4 py-2">
                                         <span
                                             class="px-2 py-1 text-sm {{ $status ? 'bg-green-100' : 'bg-red-100' }}  bg-green-100 rounded-full">
-                                            {{ $status ? __('keywords.yes') : __('keywords.red') }}</span>
+                                            {{ $status ? __('keywords.yes') : __('keywords.no') }}</span>
                                     </td>
                                 </tr>
                             @empty
