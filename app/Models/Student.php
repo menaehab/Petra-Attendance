@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,14 +30,14 @@ class Student extends Model
             $statuses = [];
 
             foreach ($sessions as $session) {
-                $statuses[$session->date->toDateString()] = $this->attendances()
-                    ->where('session_id', $session->id)
+                $dateOnly = Carbon::parse($session->date)->toDateString();
+
+                $statuses[$dateOnly] = $this->attendances()
+                    ->whereDate('created_at', $dateOnly)
                     ->exists();
             }
 
             return $statuses;
-
-            
         });
     }
 }

@@ -5,11 +5,11 @@
         <div class="text-gray-900 ">
             <div class="p-4">
                 <h1 class="text-3xl text-center">
-                    {{ __('keywords.sessions')}}
+                    {{ __('keywords.sessions') }}
                 </h1>
             </div>
             <div class="flex px-3">
-                <a href="{{ route('session.create') }}"
+                <a href="{{ route('sessions.create') }}"
                     class="px-4 py-2 text-white bg-green-500 rounded">{{ __('keywords.create_session') }}</a>
             </div>
             <div class="flex justify-center px-3 py-4">
@@ -29,13 +29,13 @@
                             <tr class="text-center bg-gray-100 border-b hover:bg-indigo-100">
                                 <td class="p-3 px-5">{{ $key + 1 }}</td>
                                 <td class="p-3 px-5">{{ $session->group->name }}</td>
-                                <td class="p-3 px-5">{{ $session->date }}</td>
+                                <td class="p-3 px-5">{{ \Carbon\Carbon::parse($session->date)->format('Y-m-d h:i A') }}</td>
                                 <td class="flex justify-center gap-1 p-3 px-5">
-                                    <a href="{{ route('session.show', $session) }}"><i
+                                    <a href="{{ route('sessions.show', $session) }}"><i
                                             class="p-2 text-white transition-colors bg-blue-500 rounded fa fa-eye hover:bg-blue-600"></i></a>
-                                    <a href="{{ route('session.edit', $session) }}"><i
+                                    <a href="{{ route('sessions.edit', $session) }}"><i
                                             class="p-2 text-white transition-colors bg-yellow-500 rounded fa fa-edit hover:bg-yellow-600"></i></a>
-                                    <form action="{{ route('session.destroy', $session) }}" method="POST"
+                                    <form action="{{ route('sessions.destroy', $session) }}" method="POST"
                                         class="d-inline delete-form">
                                         @csrf
                                         @method('DELETE')

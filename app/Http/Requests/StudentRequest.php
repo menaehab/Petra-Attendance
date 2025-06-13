@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StudentRequest extends FormRequest
@@ -16,7 +17,11 @@ class StudentRequest extends FormRequest
         return [
             'name' => 'string|max:255',
             'phone' => 'string|max:11',
-            'code' => 'string|max:255|unique:students,code',
+            'code' => [
+                'string',
+                'max:255',
+                Rule::unique('students', 'code')->ignore($this->student),
+            ],
             'group_id' => 'integer',
         ];
     }
