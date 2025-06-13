@@ -12,12 +12,9 @@ class ThemeController extends Controller
     }
     public function dashboard(Request $request)
     {
-        // $groups = Group::where('level', '=',$request->level)->get();
-        $groups = Group::where('level', $request->level)->with('students')->get();
+        $groups = Group::all();
+
         return view('dashboard' ,compact('groups'));
-    }
-    public function student(){
-        return view('studentdetails');
     }
 
 }

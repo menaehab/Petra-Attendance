@@ -17,6 +17,7 @@ class StudentController extends Controller
     public function index($id): View
     {
         $students = Student::where('group_id', $id)->latest()->get();
+
         $group = Group::where('id', $id)->first();
         return view('students.index', compact('students','group'));
     }
@@ -56,17 +57,17 @@ class StudentController extends Controller
         return redirect()->route('theme.dashboard')->with('success', 'Deleted successfully');
     }
 
-    public function import(Request $request): RedirectResponse
-    {
-        $import = new StudentImport;
-        Excel::import($import, $request->file('file'));
+    // public function import(Request $request): RedirectResponse
+    // {
+    //     $import = new StudentImport;
+    //     Excel::import($import, $request->file('file'));
 
-        if ($import->failures()->isNotEmpty()) {
-            return redirect()->back()->with([
-                'failures' => $import->failures(),
-            ]);
-        }
+    //     if ($import->failures()->isNotEmpty()) {
+    //         return redirect()->back()->with([
+    //             'failures' => $import->failures(),
+    //         ]);
+    //     }
 
-        return redirect()->route('theme.dashboard')->with('success', 'Imported successfully');
-    }
+    //     return redirect()->route('theme.dashboard')->with('success', 'Imported successfully');
+    // }
 }

@@ -14,6 +14,7 @@ class GroupRequest extends FormRequest
     public function rules(): array
     {
         return [
+            
             'name' => 'string|max:255',
             'level' => 'in:level 1,level 2,level 3',
         ];

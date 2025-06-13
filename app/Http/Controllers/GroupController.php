@@ -10,7 +10,8 @@ class GroupController extends Controller
 {
     public function index(): \Illuminate\Contracts\View\View
     {
-        $groups = Group::latest()->paginate(10);
+        // $groups = Group::latest()->paginate(10);
+        $groups = Group::all();
         return view('groups.index', compact('groups'));
     }
 
@@ -21,6 +22,8 @@ class GroupController extends Controller
 
     public function store(GroupRequest $request): \Illuminate\Http\RedirectResponse
     {
+
+
         Group::create($request->validated());
         return redirect()->route('groups.index')->with('success', 'Created successfully');
     }
@@ -37,7 +40,14 @@ class GroupController extends Controller
 
     public function update(GroupRequest $request, Group $group): \Illuminate\Http\RedirectResponse
     {
-        $group->update($request->validated());
+        $data= $request->validated();
+        $group->update([
+
+            'name'=>$data['name'],
+            'level'=>$data['level'],
+
+        ]);
+
         return redirect()->route('groups.index')->with('success', 'Updated successfully');
     }
 

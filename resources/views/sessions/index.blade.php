@@ -4,51 +4,38 @@
         <!-- component -->
         <div class="text-gray-900 ">
             <div class="p-4">
-                {{-- <h1 class="text-3xl text-center">
-                    {{ __('keywords.students') . ' ' . $group->name }}
-                </h1> --}}
+                <h1 class="text-3xl text-center">
+                    {{ __('keywords.sessions')}}
+                </h1>
             </div>
             <div class="flex px-3">
-                <a href="{{ route('students.create') }}"
-                    class="px-4 py-2 text-white bg-green-500 rounded">{{ __('keywords.create_student') }}</a>
+                <a href="{{ route('session.create') }}"
+                    class="px-4 py-2 text-white bg-green-500 rounded">{{ __('keywords.create_session') }}</a>
             </div>
             <div class="flex justify-center px-3 py-4">
                 <table class="w-full mb-4 bg-white rounded shadow-md text-md">
                     <thead class="text-center">
                         <tr class="border-b">
                             <th class="p-3 px-5">#</th>
-                            <th class="p-3 px-5">{{ __('keywords.name') }}</th>
-                            <th class="p-3 px-5">{{ __('keywords.phone') }}</th>
-                            <th class="p-3 px-5">{{ __('keywords.code') }}</th>
-                            <th class="p-3 px-5">{{ __('keywords.attendance') }}</th>
+                            <th class="p-3 px-5">{{ __('keywords.group') }}</th>
+
+                            <th class="p-3 px-5">{{ __('keywords.date') }}</th>
+
                             <th class="p-3 px-5">{{ __('keywords.action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($students as $key => $student)
+                        @foreach ($sessions as $key => $session)
                             <tr class="text-center bg-gray-100 border-b hover:bg-indigo-100">
                                 <td class="p-3 px-5">{{ $key + 1 }}</td>
-                                <td class="p-3 px-5">{{ $student->name }}</td>
-                                <td class="p-3 px-5">{{ $student->phone }}</td>
-                                <td class="p-3 px-5">{{ $student->code }}</td>
-                                <td class="p-3 px-5">
-                                    <div class="flex justify-center gap-1">
-                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-red-500 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                                        {{-- @foreach ($student->attendance_statuses as $date => $status)
-                                            <div
-                                                class="w-2 h-2 rounded-full {{ $status ? 'bg-green-500' : 'bg-red-500' }}">
-                                            </div>
-                                        @endforeach --}}
-                                    </div>
-                                </td>
+                                <td class="p-3 px-5">{{ $session->group->name }}</td>
+                                <td class="p-3 px-5">{{ $session->date }}</td>
                                 <td class="flex justify-center gap-1 p-3 px-5">
-                                    <a href="{{ route('students.show', $student) }}"><i
+                                    <a href="{{ route('session.show', $session) }}"><i
                                             class="p-2 text-white transition-colors bg-blue-500 rounded fa fa-eye hover:bg-blue-600"></i></a>
-                                    <a href="{{ route('students.edit', $student) }}"><i
+                                    <a href="{{ route('session.edit', $session) }}"><i
                                             class="p-2 text-white transition-colors bg-yellow-500 rounded fa fa-edit hover:bg-yellow-600"></i></a>
-                                    <form action="{{ route('students.destroy', $student) }}" method="POST"
+                                    <form action="{{ route('session.destroy', $session) }}" method="POST"
                                         class="d-inline delete-form">
                                         @csrf
                                         @method('DELETE')

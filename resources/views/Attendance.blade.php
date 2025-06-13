@@ -24,9 +24,9 @@
                     </div>
                     <div class="flex mt-2 space-x-2">
                         <button onclick="startTimer()"
-                            class="px-4 py-1 text-white bg-indigo-500 rounded hover:bg-indigo-400">Start</button>
+                            class="px-4 py-1 text-white bg-indigo-500 rounded hover:bg-indigo-400 ">Start</button>
                         <button onclick="resetTimer()"
-                            class="px-4 py-1 text-white bg-red-500 rounded hover:bg-red-400">Reset</button>
+                            class="px-4 py-1 text-white bg-red-500 rounded hover:bg-red-400 mr-3">Reset</button>
                     </div>
                     <div id="timerDisplay" class="mt-2 text-lg font-semibold text-red-500">00:00</div>
                 </div>

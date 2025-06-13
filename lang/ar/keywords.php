@@ -7,6 +7,8 @@ return [
     'total_present' => 'الحضور الكلي',
     'total_absent' => 'الغياب الكلي',
     'level-1' => 'اشبال',
+    'level-2' => 'مبتكرين',
+    'level-3' => 'رواد',
     'groups' => 'المجموعات',
     'name' => 'الاسم',
     'level' => 'المرحلة',
@@ -35,4 +37,10 @@ return [
     'no' => 'لا',
     'no_attendance_records' => 'لا توجد سجلات حضور.',
     'no_group' => 'لا يوجد مجموعة',
+    'create_group'=>'اضافة مجموعة',
+    'choose_level'=>'اختر  المستوي',
+    'create_session'=>'اضافة حصة',
+    'session'=>'حصة',
+    'sessions'=>'الحصص',
+    'date'=> 'التاريخ'
 ];

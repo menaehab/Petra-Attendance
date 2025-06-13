@@ -22,25 +22,44 @@
                 {{ __('keywords.attendance') }}
             </a>
         </div>
+
+        @if (Auth::check())
+        <div class="mr-5">
+            <a href="{{ route('groups.index') }}"
+                class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
+                {{ __('keywords.groups') }}
+            </a>
+        </div>
+
+        <div class="mr-5">
+            <a href="{{ route('session.index') }}"
+                class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
+                {{ __('keywords.session') }}
+            </a>
+        </div>
+        @endif
+
     </div>
 
     <div>
         @if (Auth::check())
-            @if (request()->is('/'))
+            <div class="flex items-center gap-4">
                 <a href="{{ route('theme.dashboard') }}"
-                    class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
+                class="px-5 py-2 font-semibold text-white bg-indigo-500 rounded-lg hover:bg-indigo-400 transition duration-300 shadow">
                     {{ __('Dashboard') }}
                 </a>
-            @else
-                <form action="{{ route('logout') }}" method="POST">
+
+                <form action="{{ route('logout') }}" method="POST" class="inline">
                     @csrf
                     <button type="submit"
-                        class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
+                            class="px-5 py-2 font-semibold text-white bg-red-500 rounded-lg hover:bg-red-400 transition duration-300 shadow">
                         {{ __('Log Out') }}
                     </button>
                 </form>
-            @endif
-        @else
+            </div>
+        @endif
+
+        @if(!Auth::check())
             <a href="{{ route('login') }}"
                 class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
                 {{ __('Log in') }}
