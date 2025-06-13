@@ -91,19 +91,3 @@
         });
     </script>
 @endsection
-
-{{-- @if (session('failures'))
-@foreach (session('failures') as $failure)
-    <div>
-        <p>{{ $failure->row() }}</p>
-        <p>{{ $failure->attribute() }}</p>
-        <p>
-        <ul>
-            @foreach ($failure->errors() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-        </p>
-
-    </div>
-@endforeach --}}

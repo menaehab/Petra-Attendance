@@ -42,5 +42,9 @@ return [
     'create_session'=>'اضافة حصة',
     'session'=>'حصة',
     'sessions'=>'الحصص',
-    'date'=> 'التاريخ'
+    'date'=> 'التاريخ',
+    'import_student'=>'استيراد طلاب',
+    'import_errors' => 'أخطاء في الاستيراد',
+    'row' => 'الصف',
+    'column' => 'العمود',
 ];

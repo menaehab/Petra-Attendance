@@ -57,17 +57,29 @@ class StudentController extends Controller
         return redirect()->route('theme.dashboard')->with('success', 'Deleted successfully');
     }
 
-    // public function import(Request $request): RedirectResponse
-    // {
-    //     $import = new StudentImport;
-    //     Excel::import($import, $request->file('file'));
+    public function importPage(): View
+    {
+        $groups = Group::get();
+        return view('students.import', compact('groups'));
+    }
 
-    //     if ($import->failures()->isNotEmpty()) {
-    //         return redirect()->back()->with([
-    //             'failures' => $import->failures(),
-    //         ]);
-    //     }
+    public function import(Request $request): RedirectResponse
+    {
+        $data = $request->validate([
+            'group_id' => 'required|exists:groups,id',
+            'file' => 'required|file|mimes:xlsx,xls,csv'
+        ]);
 
-    //     return redirect()->route('theme.dashboard')->with('success', 'Imported successfully');
-    // }
+        $import = new StudentImport($data['group_id']);
+
+        Excel::import($import, $data['file']);
+
+        if ($import->failures()->isNotEmpty()) {
+            return redirect()->back()->with([
+                'failures' => $import->failures(),
+            ]);
+        }
+
+        return redirect()->route('theme.dashboard')->with('success', 'Imported successfully');
+    }
 }

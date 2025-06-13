@@ -24,19 +24,26 @@
         </div>
 
         @if (Auth::check())
-        <div class="mr-5">
-            <a href="{{ route('groups.index') }}"
-                class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
-                {{ __('keywords.groups') }}
-            </a>
-        </div>
+            <div class="mr-5">
+                <a href="{{ route('groups.index') }}"
+                    class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
+                    {{ __('keywords.groups') }}
+                </a>
+            </div>
 
-        <div class="mr-5">
-            <a href="{{ route('session.index') }}"
-                class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
-                {{ __('keywords.session') }}
-            </a>
-        </div>
+            <div class="mr-5">
+                <a href="{{ route('sessions.index') }}"
+                    class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
+                    {{ __('keywords.session') }}
+                </a>
+            </div>
+
+            <div class="mr-5">
+                <a href="{{ route('students.import') }}"
+                    class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
+                    {{ __('keywords.import_student') }}
+                </a>
+            </div>
         @endif
 
     </div>
@@ -45,21 +52,21 @@
         @if (Auth::check())
             <div class="flex items-center gap-4">
                 <a href="{{ route('theme.dashboard') }}"
-                class="px-5 py-2 font-semibold text-white bg-indigo-500 rounded-lg hover:bg-indigo-400 transition duration-300 shadow">
+                    class="px-5 py-2 font-semibold text-white bg-indigo-500 rounded-lg hover:bg-indigo-400 transition duration-300 shadow">
                     {{ __('Dashboard') }}
                 </a>
 
                 <form action="{{ route('logout') }}" method="POST" class="inline">
                     @csrf
                     <button type="submit"
-                            class="px-5 py-2 font-semibold text-white bg-red-500 rounded-lg hover:bg-red-400 transition duration-300 shadow">
+                        class="px-5 py-2 font-semibold text-white bg-red-500 rounded-lg hover:bg-red-400 transition duration-300 shadow">
                         {{ __('Log Out') }}
                     </button>
                 </form>
             </div>
         @endif
 
-        @if(!Auth::check())
+        @if (!Auth::check())
             <a href="{{ route('login') }}"
                 class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
                 {{ __('Log in') }}
