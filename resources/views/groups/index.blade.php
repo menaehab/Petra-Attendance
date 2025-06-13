@@ -11,7 +11,7 @@
             <div class="flex px-3">
                 <a href="{{ route('groups.create') }}"
                     class="px-4 py-2 text-white bg-green-500 rounded">{{ __('keywords.create_group') }}</a>
-                </div>
+            </div>
             <div class="flex justify-center px-3 py-4">
                 <table class="w-full mb-4 bg-white rounded shadow-md text-md">
                     <thead class="text-center">
@@ -29,8 +29,10 @@
                                 <td class="p-3 px-5">{{ $group->name }}</td>
                                 <td class="p-3 px-5">{{ $group->level }}</td>
 
-                            <td class="flex justify-center gap-1 p-3 px-5">
-                                              <a href="{{ route('groups.edit', $group) }}"><i
+                                <td class="flex justify-center gap-1 p-3 px-5">
+                                    <a href="{{ route('students.index', $group->id) }}"><i
+                                            class="p-2 text-white transition-colors bg-blue-500 rounded fa fa-eye hover:bg-blue-600"></i></a>
+                                    <a href="{{ route('groups.edit', $group) }}"><i
                                             class="p-2 text-white transition-colors bg-yellow-500 rounded fa fa-edit hover:bg-yellow-600"></i></a>
                                     <form action="{{ route('groups.destroy', $group) }}" method="POST"
                                         class="d-inline delete-form">

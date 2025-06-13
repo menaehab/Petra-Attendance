@@ -16,18 +16,19 @@ class StudentImport implements ToArray, WithValidation,SkipsOnFailure,WithHeadin
     /**
     * @param array $array
     */
+    public $group_id;
+    public function __construct($group_id)
+    {
+        $this->group_id = $group_id;
+    }
     public function array(array $array)
     {
         foreach ($array as $row) {
-            $group = Group::where('name', $row[3])->first();
-            if (!$group) {
-                continue;
-            }
             Student::create([
-                'name' => $row[0],
-                'phone' => (string) $row[1],
-                'code' => $row[2],
-                'group_id' => $group->id,
+                'name' => $row['name'],
+                'phone' => (string) $row['phone'],
+                'code' => $row['code'],
+                'group_id' => $this->group_id,
             ]);
         }
     }
@@ -40,10 +41,9 @@ class StudentImport implements ToArray, WithValidation,SkipsOnFailure,WithHeadin
     public function rules(): array
     {
         return [
-            __('keywords.name') => 'required|string|max:255',
-            __('keywords.phone') => 'nullable',
-            __('keywords.code') => 'unique:students,code',
-            __('keywords.group_id') => 'required|exists:groups,name',
+            'name' => 'required|string|max:255',
+            'phone' => 'nullable',
+            'code' => 'unique:students,code',
         ];
     }
 }

@@ -22,7 +22,7 @@ use App\Http\Controllers\SessionController;
 */
 
 Route::controller(ThemeController::class)->name('theme.')->group(function () {
-    Route::get('/','index')->name('attendance');
+    Route::get('/attendance','index')->name('attendance');
     Route::get('/dashboard', 'dashboard')->name('dashboard')->middleware('auth');
 });
 
@@ -31,20 +31,21 @@ Route::post('/store',[AttendanceController::class,'store'])->name('attendance.st
 
 Route::middleware('auth')->group(function () {
 
-
-
-
+    // groups
     Route::patch('/groups/{group}/update',[GroupController::class,'update'])->name('groups.update');
     Route::resource('/groups', GroupController::class)->except(['update']);
 
-    Route::resource('/students', StudentController::class)->except(['show','index']);
-    Route::get('/students/{id}', [StudentController::class, 'index'])->name('students.index');
-    Route::get('/students/show/{student}', [StudentController::class, 'show'])->name('students.show');
-
+    // students
+    Route::get('/students/import', [StudentController::class, 'importPage'])->name('students.importPage');
     Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');
+    Route::resource('/students', StudentController::class)->except(['show','index']);
+    Route::get('/students/show/{student}', [StudentController::class, 'show'])->name('students.show');
+    Route::get('/students/{id}', [StudentController::class, 'index'])->name('students.index');
+
+    // sessions
+    Route::resource('/sessions', SessionController::class);
 });
 
-Route::resource('/session', SessionController::class);
 
 
 
