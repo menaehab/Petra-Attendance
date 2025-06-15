@@ -34,11 +34,13 @@
                                     <td class="p-3 px-5">{{ $student->code }}</td>
                                     <td class="p-3 px-5">
                                         <div class="flex justify-center gap-1">
-                                            @foreach ($student->attendance_statuses as $date => $status)
-                                                <div
-                                                    class="w-2 h-2 rounded-full {{ $status == true ? 'bg-green-500' : 'bg-red-500' }}">
-                                                </div>
-                                            @endforeach
+                                            <div class="flex gap-1">
+                                                @foreach ($student->attendance_statuses as $attendance)
+                                                    <div
+                                                        class="w-2 h-2 rounded-full {{ $attendance['attended'] ? 'bg-green-500' : 'bg-red-500' }}">
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </td>
                                     <td class="flex justify-center gap-1 p-3 px-5">

@@ -77,7 +77,7 @@ class AttendancePage extends Component
     public function render()
     {
         $groups = Group::all();
-        $sessions = Session::where('group_id', $this->group_id)->get();
+        $sessions = Session::where('group_id', $this->group_id)->latest()->get();
         return view('livewire.attendance-page', compact('groups', 'sessions'));
     }
 }
