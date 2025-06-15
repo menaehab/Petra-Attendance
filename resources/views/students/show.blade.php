@@ -39,14 +39,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($student->attendance_statuses as $date => $status)
+                            @forelse ($student->attendance_statuses as $attendance)
                                 <tr class="border-t">
-                                    <td class="px-4 py-2 text-gray-800">{{ $date }}
+                                    <td class="px-4 py-2 text-gray-800">
+                                        {{ \Carbon\Carbon::parse($attendance['date'])->format('Y-m-d h:i A') }}
                                     </td>
                                     <td class="px-4 py-2">
                                         <span
-                                            class="px-2 py-1 text-sm {{ $status ? 'bg-green-100' : 'bg-red-100' }}  bg-green-100 rounded-full">
-                                            {{ $status ? __('keywords.yes') : __('keywords.no') }}</span>
+                                            class="px-2 py-1 text-sm {{ $attendance['attended'] ? 'bg-green-100' : 'bg-red-100' }}  bg-green-100 rounded-full">
+                                            {{ $attendance['attended'] ? __('keywords.yes') : __('keywords.no') }}</span>
                                     </td>
                                 </tr>
                             @empty

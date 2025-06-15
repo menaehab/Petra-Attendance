@@ -19,25 +19,35 @@ class Student extends Model
 
     public function attendances()
     {
-        return $this->hasMany(Attendance::class);
+        return $this->hasMany(Attendance::class,);
     }
 
     public function attendanceStatuses(): Attribute
-    {
-        return Attribute::get(function () {
-            $sessions = Session::orderBy('date')->get();
+{
+    return Attribute::get(function () {
+        $sessions = Session::where('group_id', $this->group_id)
+            ->orderBy('date')
+            ->get();
 
-            $statuses = [];
+        $attendances = Attendance::where('student_id', $this->id)
+            ->whereIn('session_id', $sessions->pluck('id'))
+            ->get()
+            ->keyBy('session_id');
 
-            foreach ($sessions as $session) {
-                $dateOnly = Carbon::parse($session->date)->toDateString();
+        $statuses = [];
 
-                $statuses[$dateOnly] = $this->attendances()
-                    ->whereDate('created_at', $dateOnly)
-                    ->exists();
-            }
+        foreach ($sessions as $session) {
+            $attendance = $attendances->get($session->id);
 
-            return $statuses;
-        });
-    }
+            $statuses[] = [
+                'session_id' => $session->id,
+                'date' => $session->date,
+                'attended' => $attendance ? true : false,
+                'created_at' => $attendance ? $attendance->created_at->toDateTimeString() : null,
+            ];
+        }
+
+        return $statuses;
+    });
+}
 }
