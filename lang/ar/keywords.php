@@ -64,4 +64,5 @@ return [
     'session_details'=>'تفاصيل الحصة',
     'admin_panel'=>'لوحة تحكم',
     'petra'=>'بيترا',
+    'send_message' => 'ارسال الرسالة'
 ];

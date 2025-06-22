@@ -18,7 +18,8 @@
                         <thead class="bg-gray-100">
                             <tr>
                                 <th class="px-4 py-2 text-sm font-medium text-gray-700">#</th>
-                                <th class="px-4 py-2 text-sm font-medium text-gray-700">{{ __('keywords.name') }}
+                                <th class="px-4 py-2 text-sm font-medium text-gray-700">{{ __('keywords.name') }}</th>
+                                <th class="px-4 py-2 text-sm font-medium text-gray-700"> {{ __('keywords.send_message') }}
                                 </th>
                                 <th class="px-4 py-2 text-sm font-medium text-gray-700">{{ __('keywords.attended') }}</th>
                             </tr>
@@ -30,14 +31,31 @@
                                     <td class="px-4 py-2 text-gray-800">{{ $student->name }}</td>
                                     <td class="px-4 py-2">
                                         @if ($student->attendances->isNotEmpty())
-                                            <span class="px-2 py-1 text-sm bg-green-100 text-green-800 rounded-full">
+                                            <a href="{{ route('attendance.whatsapp', [$student, 'present']) }}">
+                                                <i
+                                                    class="p-2 text-white transition-colors bg-green-500 rounded fa fa-check hover:bg-green-600"></i>
+                                            </a>
+                                            <a href="{{ route('attendance.whatsapp', [$student, 'late']) }}">
+                                                <i
+                                                    class="p-2 text-white transition-colors bg-yellow-500 rounded fa fa-clock hover:bg-yellow-600"></i>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('attendance.whatsapp', [$student, 'absent']) }}">
+                                                <i
+                                                    class="p-2 text-white transition-colors bg-red-500 rounded fa fa-times hover:bg-red-600"></i>
+                                            </a>
+                                        @endif
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        @if ($student->attendances->isNotEmpty())
+                                            <span class="px-2 py-1 text-sm text-green-800 bg-green-100 rounded-full">
                                                 {{ __('keywords.yes') }}
                                             </span>
                                             <div class="mt-1 text-xs text-gray-500">
                                                 {{ $student->attendances->first()->created_at->format('h:i A') }}
                                             </div>
                                         @else
-                                            <span class="px-2 py-1 text-sm bg-red-100 text-red-800 rounded-full">
+                                            <span class="px-2 py-1 text-sm text-red-800 bg-red-100 rounded-full">
                                                 {{ __('keywords.no') }}
                                             </span>
                                         @endif
