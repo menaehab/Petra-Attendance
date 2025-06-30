@@ -55,8 +55,8 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $sessions->links('pagination::tailwind') }}
                 </div>
-
             </div>
         </div>
     </div>
