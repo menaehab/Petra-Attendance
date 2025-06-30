@@ -45,15 +45,17 @@
                     {{ __('keywords.session') }}
                 </a>
 
-                <a href="{{ route('students.create') }}"
-                    class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
-                    {{ __('keywords.create_student') }}
-                </a>
+                @hasrole('admin')
+                    <a href="{{ route('students.create') }}"
+                        class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
+                        {{ __('keywords.create_student') }}
+                    </a>
 
-                <a href="{{ route('students.import') }}"
-                    class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
-                    {{ __('keywords.import_student') }}
-                </a>
+                    <a href="{{ route('students.import') }}"
+                        class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
+                        {{ __('keywords.import_student') }}
+                    </a>
+                @endhasrole
 
                 <a href="{{ route('attendance') }}"
                     class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">

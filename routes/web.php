@@ -25,14 +25,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [ThemeController::class,'index'])->name('dashboard');
 
     // groups
-    Route::patch('/groups/{group}/update',[GroupController::class,'update'])->name('groups.update');
+    Route::patch('/groups/{group}/update',[GroupController::class,'update'])->name('groups.update')->middleware('role:admin');
     Route::resource('/groups', GroupController::class)->except(['update']);
 
     // students
-    Route::get('/students/import', [StudentController::class, 'importPage'])->name('students.importPage');
-    Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');
-    Route::resource('/students', StudentController::class)->except(['show','index','update']);
-    Route::patch('/students/{student}/update', [StudentController::class, 'update'])->name('students.update');
+    Route::get('/students/import', [StudentController::class, 'importPage'])->name('students.importPage')->middleware('role:admin');
+    Route::post('/students/import', [StudentController::class, 'import'])->name('students.import')->middleware('role:admin');
+    Route::resource('/students', StudentController::class)->except(['show','index','update'])->middleware('role:admin');
+    Route::patch('/students/{student}/update', [StudentController::class, 'update'])->name('students.update')->middleware('role:admin');
     Route::get('/students/show/{student}', [StudentController::class, 'show'])->name('students.show');
     Route::get('/students/{id}', [StudentController::class, 'index'])->name('students.index');
 

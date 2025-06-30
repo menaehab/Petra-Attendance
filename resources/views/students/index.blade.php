@@ -46,15 +46,17 @@
                                     <td class="flex justify-center gap-1 p-3 px-5">
                                         <a href="{{ route('students.show', $student) }}"><i
                                                 class="p-2 text-white transition-colors bg-blue-500 rounded fa fa-eye hover:bg-blue-600"></i></a>
-                                        <a href="{{ route('students.edit', $student) }}"><i
-                                                class="p-2 text-white transition-colors bg-yellow-500 rounded fa fa-edit hover:bg-yellow-600"></i></a>
-                                        <form action="{{ route('students.destroy', $student) }}" method="POST"
-                                            class="d-inline delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" href="#"><i
-                                                    class="p-2 text-white transition-colors bg-red-500 rounded fa fa-trash hover:bg-red-600"></i></button>
-                                        </form>
+                                        @hasrole('admin')
+                                            <a href="{{ route('students.edit', $student) }}"><i
+                                                    class="p-2 text-white transition-colors bg-yellow-500 rounded fa fa-edit hover:bg-yellow-600"></i></a>
+                                            <form action="{{ route('students.destroy', $student) }}" method="POST"
+                                                class="d-inline delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" href="#"><i
+                                                        class="p-2 text-white transition-colors bg-red-500 rounded fa fa-trash hover:bg-red-600"></i></button>
+                                            </form>
+                                        @endhasrole
                                     </td>
                                 </tr>
                             @endforeach
