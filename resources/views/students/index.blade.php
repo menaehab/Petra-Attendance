@@ -37,7 +37,7 @@
                                             <div class="flex gap-1">
                                                 @foreach ($student->attendance_statuses as $attendance)
                                                     <div
-                                                        class="w-2 h-2 rounded-full {{ $attendance['attended'] ? 'bg-green-500' : 'bg-red-500' }}">
+                                                        class="w-2 h-2 rounded-full {{ $attendance['attended'] ? ($attendance['late'] ? 'bg-yellow-500' : 'bg-green-500') : 'bg-red-500' }}">
                                                     </div>
                                                 @endforeach
                                             </div>
