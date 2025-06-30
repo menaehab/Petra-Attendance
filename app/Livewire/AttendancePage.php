@@ -67,11 +67,11 @@ class AttendancePage extends Component
 
         session()->flash('success', __('keywords.attendance_success'));
 
-        $phone = '2' . $student->phone;
-        $message = "تم حضور {$student->name} إلى المدرسة";
-        $link = 'https://wa.me/' . $phone . '?text=' . urlencode($message);
+        // $phone = '2' . $student->phone;
+        // $message = "تم حضور {$student->name} إلى المدرسة";
+        // $link = 'https://wa.me/' . $phone . '?text=' . urlencode($message);
 
-        $this->dispatch('open-whatsapp', link: $link);
+        // $this->dispatch('open-whatsapp', link: $link);
     }
 
     public function render()

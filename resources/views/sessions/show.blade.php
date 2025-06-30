@@ -31,16 +31,18 @@
                                     <td class="px-4 py-2 text-gray-800">{{ $student->name }}</td>
                                     <td class="px-4 py-2">
                                         @if ($student->attendances->isNotEmpty())
-                                            <a href="{{ route('attendance.whatsapp', [$student, 'present']) }}">
+                                            <a
+                                                href="{{ route('attendance.whatsapp', [$student, $session->id, 'present']) }}">
                                                 <i
                                                     class="p-2 text-white transition-colors bg-green-500 rounded fa fa-check hover:bg-green-600"></i>
                                             </a>
-                                            <a href="{{ route('attendance.whatsapp', [$student, 'late']) }}">
+                                            <a href="{{ route('attendance.whatsapp', [$student, $session->id, 'late']) }}">
                                                 <i
                                                     class="p-2 text-white transition-colors bg-yellow-500 rounded fa fa-clock hover:bg-yellow-600"></i>
                                             </a>
                                         @else
-                                            <a href="{{ route('attendance.whatsapp', [$student, 'absent']) }}">
+                                            <a
+                                                href="{{ route('attendance.whatsapp', [$student, $session->id, 'absent']) }}">
                                                 <i
                                                     class="p-2 text-white transition-colors bg-red-500 rounded fa fa-times hover:bg-red-600"></i>
                                             </a>

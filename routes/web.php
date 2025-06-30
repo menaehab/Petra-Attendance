@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
 
     // attendance
     Route::get('/attendance', [AttendanceController::class,'index'])->name('attendance');
-    Route::get('/attendance/{student}/{status}', [WhatsAppController::class, 'attendance'])->name('attendance.whatsapp');
+    Route::get('/attendance/{student}/{session_id}/{status}', [WhatsAppController::class, 'attendance'])->name('attendance.whatsapp');
 });
 
 require __DIR__.'/auth.php';
