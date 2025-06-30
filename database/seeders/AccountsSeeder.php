@@ -15,6 +15,13 @@ class AccountsSeeder extends Seeder
     {
         $users = [
             [
+                'name' => 'user',
+                'email' => 'user@petra.com',
+                'password' => 'user123456',
+            ]
+        ];
+        $admins = [
+            [
                 'name' => 'Fady Emad',
                 'email' => 'fadi@petra.com',
                 'password' => '22843730',
@@ -27,16 +34,29 @@ class AccountsSeeder extends Seeder
             [
                 'name' => 'admin',
                 'email' => 'admin@petra.com',
-                'password' => 'password',
-            ]
+                'password' => 'p@ssw0rd',
+            ],
         ];
 
         foreach ($users as $user) {
-            User::create([
+            User::updateOrCreate([
+                'email' => $user['email'],
+            ], [
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'password' => Hash::make($user['password']),
             ]);
+        }
+        foreach ($admins as $admin) {
+            $admin = User::updateOrCreate([
+                'email' => $admin['email'],
+            ], [
+                'name' => $admin['name'],
+                'email' => $admin['email'],
+                'password' => Hash::make($admin['password']),
+            ]);
+
+            $admin->assignRole('admin');
         }
     }
 }

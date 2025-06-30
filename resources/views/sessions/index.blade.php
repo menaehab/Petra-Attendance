@@ -39,15 +39,17 @@
                                             <i
                                                 class="p-2 text-white transition-colors bg-yellow-500 rounded fa fa-edit hover:bg-yellow-600"></i>
                                         </a>
-                                        <form action="{{ route('sessions.destroy', $session) }}" method="POST"
-                                            class="d-inline delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit">
-                                                <i
-                                                    class="p-2 text-white transition-colors bg-red-500 rounded fa fa-trash hover:bg-red-600"></i>
-                                            </button>
-                                        </form>
+                                        @hasrole('admin')
+                                            <form action="{{ route('sessions.destroy', $session) }}" method="POST"
+                                                class="d-inline delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" href="#">
+                                                    <i
+                                                        class="p-2 text-white transition-colors bg-red-500 rounded fa fa-trash hover:bg-red-600"></i>
+                                                </button>
+                                            </form>
+                                        @endhasrole
                                     </td>
                                 </tr>
                             @endforeach

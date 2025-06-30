@@ -8,6 +8,10 @@ use App\Models\Group;
 
 class GroupController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin')->except('index');
+    }
     public function index(): \Illuminate\Contracts\View\View
     {
         // $groups = Group::latest()->paginate(10);
