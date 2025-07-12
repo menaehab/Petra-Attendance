@@ -18,4 +18,9 @@ class Group extends Model
     {
         return $this->hasMany(Session::class);
     }
+
+    public function levelRelation()
+    {
+        return $this->belongsTo(Level::class, 'level_id', 'id');
+    }
 }

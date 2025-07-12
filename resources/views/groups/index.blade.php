@@ -28,7 +28,7 @@
                                 <tr class="text-center bg-gray-100 border-b hover:bg-indigo-100">
                                     <td class="p-3 px-5">{{ $key + 1 }}</td>
                                     <td class="p-3 px-5">{{ $group->name }}</td>
-                                    <td class="p-3 px-5">{{ $group->level }}</td>
+                                    <td class="p-3 px-5">{{ $group->levelRelation->name }}</td>
 
                                     <td class="flex justify-center gap-1 p-3 px-5">
                                         <a href="{{ route('students.index', $group->id) }}"><i
@@ -44,15 +44,6 @@
                                                         class="p-2 text-white transition-colors bg-red-500 rounded fa fa-trash hover:bg-red-600"></i></button>
                                             </form>
                                         @endhasrole
-                                        <a href="{{ route('groups.edit', $group) }}"><i
-                                                class="p-2 text-white transition-colors bg-yellow-500 rounded fa fa-edit hover:bg-yellow-600"></i></a>
-                                        <form action="{{ route('groups.destroy', $group) }}" method="POST"
-                                            class="d-inline delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" href="#"><i
-                                                    class="p-2 text-white transition-colors bg-red-500 rounded fa fa-trash hover:bg-red-600"></i></button>
-                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
