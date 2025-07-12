@@ -51,4 +51,9 @@ class Student extends Model
             return $statuses;
         });
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }
