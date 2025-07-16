@@ -7,6 +7,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\WhatsAppController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,10 @@ Route::middleware('auth')->group(function () {
     // attendance
     Route::get('/attendance', [AttendanceController::class,'index'])->name('attendance');
     Route::get('/attendance/{student}/{session_id}/{status}', [WhatsAppController::class, 'attendance'])->name('attendance.whatsapp');
+
+    // tasks
+    Route::get('/tasks/{task}/students/{student}/status', [TaskController::class, 'updateStatus'])->name('tasks.updateStatus');
+    Route::resource('tasks', TaskController::class);
 });
 
 require __DIR__.'/auth.php';

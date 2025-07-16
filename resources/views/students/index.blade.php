@@ -22,6 +22,9 @@
                                 <th class="p-3 px-5">{{ __('keywords.phone') }}</th>
                                 <th class="p-3 px-5">{{ __('keywords.code') }}</th>
                                 <th class="p-3 px-5">{{ __('keywords.attendance') }}</th>
+                                @foreach ($courses as $course)
+                                    <th class="p-3 px-5">{{ $course->name }} (20)</th>
+                                @endforeach
                                 <th class="p-3 px-5">{{ __('keywords.action') }}</th>
                             </tr>
                         </thead>
@@ -43,6 +46,17 @@
                                             </div>
                                         </div>
                                     </td>
+                                    @foreach ($courses as $course)
+                                        @php
+                                            $totalTasks = \App\Models\Task::where('course_id', $course->id)->count();
+                                            $studentTasks = $student->tasks()->where('course_id', $course->id)->count();
+                                            $grade = $totalTasks > 0 ? ($studentTasks / $totalTasks) * 20 : 0;
+                                        @endphp
+
+                                        <td class="p-3 px-5">
+                                            {{ round($grade, 2) }}
+                                        </td>
+                                    @endforeach
                                     <td class="flex justify-center gap-1 p-3 px-5">
                                         <a href="{{ route('students.show', $student) }}"><i
                                                 class="p-2 text-white transition-colors bg-blue-500 rounded fa fa-eye hover:bg-blue-600"></i></a>

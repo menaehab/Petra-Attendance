@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('student_id')->constrained('students')->cascadeOnDelete();
             $table->foreignId('task_id')->constrained('tasks')->cascadeOnDelete();
-            $table->boolean('is_completed')->default(false);
             $table->timestamps();
         });
     }

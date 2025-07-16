@@ -55,6 +55,11 @@
                         class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
                         {{ __('keywords.import_student') }}
                     </a>
+
+                    <a href="{{ route('tasks.index') }}"
+                        class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
+                        {{ __('keywords.tasks') }}
+                    </a>
                 @endhasrole
 
                 <a href="{{ route('attendance') }}"

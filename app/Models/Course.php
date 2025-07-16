@@ -16,8 +16,8 @@ class Course extends Model
         return $this->hasMany(Task::class);
     }
 
-    public function group()
+    public function level()
     {
-        return $this->belongsTo(Group::class);
+        return $this->belongsTo(Level::class);
     }
 }
