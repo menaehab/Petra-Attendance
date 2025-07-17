@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AccountsSeeder extends Seeder
@@ -13,11 +14,12 @@ class AccountsSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = [
+        DB::table('users')->truncate();
+        $attendance_officers = [
             [
-                'name' => 'user',
-                'email' => 'user@petra.com',
-                'password' => 'user123456',
+                'name' => 'attendance',
+                'email' => 'attendance@petra.com',
+                'password' => 'attendance123456',
             ]
         ];
         $admins = [
@@ -38,14 +40,43 @@ class AccountsSeeder extends Seeder
             ],
         ];
 
-        foreach ($users as $user) {
-            User::updateOrCreate([
-                'email' => $user['email'],
+        $teachers = [
+            [
+                'name' => 'marola',
+                'email' => 'marola@petra.com',
+                'password' => 'marola123456',
+            ],
+            [
+                'name' => 'passent',
+                'email' => 'passent@petra.com',
+                'password' => 'passent123456',
+            ],
+            [
+                'name' => 'kermina',
+                'email' => 'kermina@petra.com',
+                'password' => 'kermina123456',
+            ],
+            [
+                'name' => 'wassem',
+                'email' => 'wassem@petra.com',
+                'password' => 'wassem123456',
+            ],
+            [
+                'name' => 'tervena',
+                'email' => 'tervena@petra.com',
+                'password' => 'tervena123456',
+            ]
+        ];
+
+        foreach ($attendance_officers as $attendance_officer) {
+            $attendance_officer =User::updateOrCreate([
+                'email' => $attendance_officer['email'],
             ], [
-                'name' => $user['name'],
-                'email' => $user['email'],
-                'password' => Hash::make($user['password']),
+                'name' => $attendance_officer['name'],
+                'email' => $attendance_officer['email'],
+                'password' => Hash::make($attendance_officer['password']),
             ]);
+            $attendance_officer->syncRoles('attendance_officer');
         }
         foreach ($admins as $admin) {
             $admin = User::updateOrCreate([
@@ -56,7 +87,18 @@ class AccountsSeeder extends Seeder
                 'password' => Hash::make($admin['password']),
             ]);
 
-            $admin->assignRole('admin');
+            $admin->syncRoles('admin');
+        }
+        foreach ($teachers as $teacher) {
+            $teacher = User::updateOrCreate([
+                'email' => $teacher['email'],
+            ], [
+                'name' => $teacher['name'],
+                'email' => $teacher['email'],
+                'password' => Hash::make($teacher['password']),
+            ]);
+
+            $teacher->syncRoles('teacher');
         }
     }
 }

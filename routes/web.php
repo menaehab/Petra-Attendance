@@ -7,6 +7,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\WhatsAppController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,15 +34,22 @@ Route::middleware('auth')->group(function () {
     Route::post('/students/import', [StudentController::class, 'import'])->name('students.import')->middleware('role:admin');
     Route::resource('/students', StudentController::class)->except(['show','index','update'])->middleware('role:admin');
     Route::patch('/students/{student}/update', [StudentController::class, 'update'])->name('students.update')->middleware('role:admin');
-    Route::get('/students/show/{student}', [StudentController::class, 'show'])->name('students.show');
+    Route::get('/students/show/{student}', [StudentController::class, 'show'])->name('students.show')->middleware('role:admin|attendance_officer');
+
     Route::get('/students/{id}', [StudentController::class, 'index'])->name('students.index');
 
     // sessions
-    Route::resource('/sessions', SessionController::class)->names('sessions');
+    Route::resource('/sessions', SessionController::class)->names('sessions')->middleware('role:admin|attendance_officer');
 
     // attendance
-    Route::get('/attendance', [AttendanceController::class,'index'])->name('attendance');
-    Route::get('/attendance/{student}/{session_id}/{status}', [WhatsAppController::class, 'attendance'])->name('attendance.whatsapp');
+    Route::get('/attendance', [AttendanceController::class,'index'])->name('attendance')->middleware('role:admin|attendance_officer');
+
+    Route::get('/attendance/{student}/{session_id}/{status}', [WhatsAppController::class, 'attendance'])->name('attendance.whatsapp')->middleware('role:admin|attendance_officer');
+
+
+    // tasks
+    Route::get('/tasks/{task}/students/{student}/status', [TaskController::class, 'updateStatus'])->name('tasks.updateStatus')->middleware('role:admin|teacher');
+    Route::resource('tasks', TaskController::class)->middleware('role:admin|teacher');
 });
 
 require __DIR__.'/auth.php';

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\Level;
+use App\Models\Course;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Imports\StudentImport;
@@ -17,9 +19,10 @@ class StudentController extends Controller
     public function index($id): View
     {
         $students = Student::where('group_id', $id)->latest()->get();
-
         $group = Group::where('id', $id)->first();
-        return view('students.index', compact('students','group'));
+        $level = Level::where('id', $group->level_id)->first();
+        $courses = Course::where('level_id', $level->id)->get();
+        return view('students.index', compact('students','group','level','courses'));
     }
 
     public function create(): View

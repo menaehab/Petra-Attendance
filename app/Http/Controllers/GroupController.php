@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\GroupRequest;
 use App\Models\Group;
+use App\Models\Level;
+use App\Http\Requests\GroupRequest;
+use App\Http\Controllers\Controller;
 
 class GroupController extends Controller
 {
@@ -21,7 +22,8 @@ class GroupController extends Controller
 
     public function create(): \Illuminate\Contracts\View\View
     {
-        return view('groups.create');
+        $levels = Level::all();
+        return view('groups.create', compact('levels'));
     }
 
     public function store(GroupRequest $request): \Illuminate\Http\RedirectResponse
@@ -37,7 +39,8 @@ class GroupController extends Controller
 
     public function edit(Group $group): \Illuminate\Contracts\View\View
     {
-        return view('groups.edit', compact('group'));
+        $levels = Level::all();
+        return view('groups.edit', compact('group', 'levels'));
     }
 
     public function update(GroupRequest $request, Group $group): \Illuminate\Http\RedirectResponse

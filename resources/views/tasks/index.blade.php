@@ -5,12 +5,12 @@
         <div class="text-gray-900 ">
             <div class="p-4">
                 <h1 class="text-3xl text-center">
-                    {{ __('keywords.groups') }}
+                    {{ __('keywords.tasks') }}
                 </h1>
             </div>
             <div class="flex px-3">
-                <a href="{{ route('groups.create') }}"
-                    class="px-4 py-2 text-white bg-green-500 rounded">{{ __('keywords.create_group') }}</a>
+                <a href="{{ route('tasks.create') }}"
+                    class="px-4 py-2 text-white bg-green-500 rounded">{{ __('keywords.create_task') }}</a>
             </div>
             <div class="flex justify-center px-3 py-4">
                 <div class="w-full overflow-x-auto">
@@ -18,32 +18,32 @@
                         <thead class="text-center">
                             <tr class="border-b">
                                 <th class="p-3 px-5">#</th>
-                                <th class="p-3 px-5">{{ __('keywords.group') }}</th>
+                                <th class="p-3 px-5">{{ __('keywords.title') }}</th>
+                                <th class="p-3 px-5">{{ __('keywords.course') }}</th>
                                 <th class="p-3 px-5">{{ __('keywords.level') }}</th>
                                 <th class="p-3 px-5">{{ __('keywords.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($groups as $key => $group)
+                            @foreach ($tasks as $key => $task)
                                 <tr class="text-center bg-gray-100 border-b hover:bg-indigo-100">
                                     <td class="p-3 px-5">{{ $key + 1 }}</td>
-                                    <td class="p-3 px-5">{{ $group->name }}</td>
-                                    <td class="p-3 px-5">{{ $group->levelRelation->name }}</td>
+                                    <td class="p-3 px-5">{{ $task->title }}</td>
+                                    <td class="p-3 px-5">{{ $task->course->name }}</td>
+                                    <td class="p-3 px-5">{{ $task->course->level->name }}</td>
 
                                     <td class="flex justify-center gap-1 p-3 px-5">
-                                        <a href="{{ route('students.index', $group->id) }}"><i
+                                        <a href="{{ route('tasks.show', $task) }}"><i
                                                 class="p-2 text-white transition-colors bg-blue-500 rounded fa fa-eye hover:bg-blue-600"></i></a>
-                                        @hasrole('admin')
-                                            <a href="{{ route('groups.edit', $group) }}"><i
-                                                    class="p-2 text-white transition-colors bg-yellow-500 rounded fa fa-edit hover:bg-yellow-600"></i></a>
-                                            <form action="{{ route('groups.destroy', $group) }}" method="POST"
-                                                class="d-inline delete-form">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" href="#"><i
-                                                        class="p-2 text-white transition-colors bg-red-500 rounded fa fa-trash hover:bg-red-600"></i></button>
-                                            </form>
-                                        @endhasrole
+                                        <a href="{{ route('tasks.edit', $task) }}"><i
+                                                class="p-2 text-white transition-colors bg-yellow-500 rounded fa fa-edit hover:bg-yellow-600"></i></a>
+                                        <form action="{{ route('tasks.destroy', $task) }}" method="POST"
+                                            class="d-inline delete-form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" href="#"><i
+                                                    class="p-2 text-white transition-colors bg-red-500 rounded fa fa-trash hover:bg-red-600"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

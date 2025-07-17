@@ -19,7 +19,12 @@ class Student extends Model
 
     public function attendances()
     {
-        return $this->hasMany(Attendance::class,);
+        return $this->hasMany(Attendance::class);
+    }
+
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class, 'student_task', 'student_id', 'task_id')->withTimestamps();
     }
 
     public function attendanceStatuses(): Attribute
@@ -51,4 +56,6 @@ class Student extends Model
             return $statuses;
         });
     }
+
+
 }
