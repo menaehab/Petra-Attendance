@@ -40,12 +40,13 @@
                     {{ __('keywords.groups') }}
                 </a>
 
-                <a href="{{ route('sessions.index') }}"
-                    class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
-                    {{ __('keywords.session') }}
-                </a>
-
-                @hasrole('admin')
+                @if (Auth::user()->hasRole('attendance_officer') || Auth::user()->hasRole('admin'))
+                    <a href="{{ route('sessions.index') }}"
+                        class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
+                        {{ __('keywords.session') }}
+                    </a>
+                @endif
+                @if (Auth::user()->hasRole('admin'))
                     <a href="{{ route('students.create') }}"
                         class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
                         {{ __('keywords.create_student') }}
@@ -55,17 +56,19 @@
                         class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
                         {{ __('keywords.import_student') }}
                     </a>
-
+                @endif
+                @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('teacher'))
                     <a href="{{ route('tasks.index') }}"
                         class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
                         {{ __('keywords.tasks') }}
                     </a>
-                @endhasrole
-
-                <a href="{{ route('attendance') }}"
-                    class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
-                    {{ __('keywords.attendance') }}
-                </a>
+                @endif
+                @if (Auth::user()->hasRole('attendance_officer') || Auth::user()->hasRole('admin'))
+                    <a href="{{ route('attendance') }}"
+                        class="px-5 py-2 font-semibold text-white transition bg-indigo-500 rounded-lg hover:bg-indigo-400">
+                        {{ __('keywords.attendance') }}
+                    </a>
+                @endif
 
                 <a href="{{ route('dashboard') }}"
                     class="px-5 py-2 font-semibold text-white transition duration-300 bg-indigo-500 rounded-lg shadow hover:bg-indigo-400">
